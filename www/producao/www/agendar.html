@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="utf-8">
+<title>Primeiros passos</title>
+    <!-- Font Awesome-->
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css" type="text/css">
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+    <!-- JQuery-->
+    <script src="js/jquery.js"></script>
+<style>
+
+</style>
+
+</head>
+<script>
+</script>
+<body>
+    
+        <h2 class="text-center" id="title">Agendar</h2>
+
+        <div class="container">
+    <div class="row">
+        <div class='col-sm-6'>
+            <div class="form-group">
+                <div class='input-group date' id='datetimepicker1'>
+                    <input type='text' class="form-control" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            $(function () {
+                $('#datetimepicker1').datetimepicker();
+            });
+        </script>
+    </div>
+</div>
+            
+
+            <div class="container">              
+              <a href="#"><button type="button" class="btn btn-success btn-block btn-lg" id="btn-proximo"> <span class="text">Próximo</span></button></a>
+
+           </div>
+</body>
+</html>
+
+
