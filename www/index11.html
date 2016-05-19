@@ -1,0 +1,453 @@
+<html lang="pt-br" manifest="offlinedatabase.manifest">
+<head>
+<meta charset="utf-8">
+<title>Primeiros passos</title>
+    <!-- Font Awesome-->
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css" type="text/css">
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="css/main.css" type="text/css">
+    <!-- JQuery-->
+    <script src="js/jquery.js"></script>
+    <!-- required for modal-->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <!-- include jQuery -->
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <!-- include bootstrap -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <!-- Load Script and Stylesheet -->
+    <script type="text/javascript" src="js/jquery.simple-dtpicker.js"></script>
+    <link type="text/css" href="css/jquery.simple-dtpicker.css" rel="stylesheet"/>
+    <!-- Calendar-->
+    <link href='css/fullcalendar.css' rel='stylesheet' />
+    <link href='css/fullcalendar.print.css' rel='stylesheet' media='print'/>
+    <script src='js/moment.min.js'></script>
+    <script src='js/fullcalendar.min.js'></script>
+    <script src='lang/pt.js'></script>
+
+    <!-- BD -->
+     <script type="text/javascript" src="offlinedatabaseJS.js" ></script>
+     <!-- <script type="text/javascript" src="js/main.js" ></script> -->
+
+<style>
+h3, h2 {
+    font-family: Lobster, Monospace;
+  }
+/*http://stackoverflow.com/questions/30121240/javascript-library-that-manipulates-dates-like-carbon*/
+h3, h2 {
+    font-family: Lobster, Monospace;
+  }
+  #left-well {
+
+  }
+  h2 {
+    color:rgba(76, 175, 80, 0.92);
+
+  }
+  button{
+    margin: 20px 20px 20px 0px;
+
+  }
+
+  /* CSS REQUIRED */
+.state-icon {
+    left: -5px;
+}
+.list-group-item-primary {
+    color: rgb(255, 255, 255);
+    background-color: rgb(66, 139, 202);
+}
+
+/* DEMO ONLY - REMOVES UNWANTED MARGIN */
+.well .list-group {
+    margin-bottom: 0px;
+}
+
+body {
+  background: #72cffa;
+}
+.modal-dialog {
+  width: 100%;
+  height: 100%;
+ margin: 0;  padding: 0;
+}
+
+.modal-content {
+  height: auto;
+  min-height: 100%;
+  border-radius: 0;
+}
+#calendar {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .teste{
+  background-color: yellow;
+  /*background-color: lightblue;*/
+   background-image: url("img/logo.png");
+}
+
+
+
+
+</style>
+
+</head>
+<script>
+
+$('#modal-fullscreen').on('hidden', function () {
+  // Load up a new modal...
+  $('#modal-agenda').modal('show')
+})
+
+</script>
+
+<script>
+
+  $(document).ready(function() {
+
+    //lista de produtos dinamica - montar busca por meio do bd
+    console.log("carrendo!");
+    console.log(produtos);
+      //var produtos=
+      /*var produtos =
+      [{id:1,
+        name: "Açafrão",
+        days: 45},
+      {
+        id:2,
+        name: "Alface",
+        days: 12
+      },
+      {
+        id:3,
+        name: "Almeirão",
+        days: 12
+      },
+      {
+        id:4,
+        name: "Beringela",
+        days: 12
+      },
+      {
+        id:5,
+        name: "Beterraba",
+        days: 12
+      },
+      {
+        id:6,
+        name: "Cebola Cabeça",
+        days: 12
+      }
+    ];*/
+
+    var cList = $('ul.list-group.checked-list-box')
+    $.each(produtos, function(i)
+    {
+        var li = $('<li/>')
+            .addClass('list-group-item')
+            .text(produtos[i].name)
+            .appendTo(cList);
+    });
+
+        
+
+        $(function () 
+        {
+            $('.list-group.checked-list-box .list-group-item').each(function () 
+            {
+
+            // Settings
+            var $widget = $(this),
+            $checkbox = $('<input type="checkbox" class="hidden" />'),
+            color = ($widget.data('color') ? $widget.data('color') : "primary"),
+            style = ($widget.data('style') == "button" ? "btn-" : "list-group-item-"),
+            settings = 
+            {
+                on: 
+                {
+                icon: 'glyphicon glyphicon-check'
+                },
+                off: 
+                {
+                icon: 'glyphicon glyphicon-unchecked'
+                }
+            };
+
+                $widget.css('cursor', 'pointer');
+                $widget.append($checkbox);
+
+                // Event Handlers
+                $widget.on('click', function () 
+                {
+                    $checkbox.prop('checked', !$checkbox.is(':checked'));
+                    $checkbox.triggerHandler('change');
+                    updateDisplay();
+                });
+                $checkbox.on('change', function () 
+                {
+                    updateDisplay();
+                });
+           
+
+          // Actions
+          function updateDisplay() 
+            {
+              var isChecked = $checkbox.is(':checked');
+
+              // Set the button's state
+              $widget.data('state', (isChecked) ? "on" : "off");
+
+              // Set the button's icon
+              $widget.find('.state-icon')
+                  .removeClass()
+                  .addClass('state-icon ' + settings[$widget.data('state')].icon);
+
+              // Update the button's color
+                if (isChecked)
+                {
+                    $widget.addClass(style + color + ' active');
+                } 
+                else 
+                {
+                    $widget.removeClass(style + color + ' active');
+                }
+            }
+
+              // Initialization
+                function init() 
+                {
+                    if ($widget.data('checked') == true) 
+                    {
+                        $checkbox.prop('checked', !$checkbox.is(':checked'));
+                    }
+                    updateDisplay();
+
+                    // Inject the icon if applicable
+                    if ($widget.find('.state-icon').length == 0) 
+                    {
+                    $widget.prepend('<span class="state-icon ' + settings[$widget.data('state')].icon + '"></span>');
+                    }
+                }
+            init();
+            });
+            
+        });
+  
+
+      $('#calendar').fullCalendar({
+      header: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'month,basicWeek,basicDay',
+      },
+      defaultDate: currentDate,
+      editable: true,
+      eventLimit: true, // allow "more" link when too many events
+      events: [
+
+      ]
+    });
+  
+
+      // elementos importantes criados ao iniciar
+      var list_selected = [];
+      var new_date = moment().format("DD-MM-YYYY");
+      var currentDate = moment().format("YYYY-MM-DD");
+
+
+    // lista de elementos selecionados
+      $('#btn-proximo-lp').on('click', function(event) {
+          event.preventDefault();
+          
+          counter = 0;
+          while(counter == 0){
+          $("ul.checked-list-box  li.active").each(function(idx, li) {
+              //checkedItems[counter] = $(li).text();
+              //produtos[idx].selected = true;
+              list_selected.push($(li).text());
+              
+              counter++;
+          });
+          }
+
+      });
+      // agendamento
+      $('#btn-proximo-agendar').on('click', function(event){
+        event.preventDefault();
+        //pegar a data
+      date_format = moment($('#agendar').handleDtpicker('getDate')).format("YYYY-MM-DD");
+      new_date = (moment(date_format).format("YYYY-MM-DD"));
+
+      //validar data
+      var cont = 0;
+     $("#agendar").each(function(){
+         if($(this).val() == "")
+             {
+              $(this).css({"border" : "1px solid #F00", "padding": "2px"});
+                 cont++;
+             }
+        });
+
+     if(cont == 0)
+         {
+              criarEvento = function(obj,data_ag)
+              {
+                return {
+                  id:obj.id,
+                  title: obj.name,
+                  start: data_ag,
+                  textColor: 'blue',
+                  color:'#A7DBD8',
+                  editable:false,
+                  description: 'Lorem ipsum lorem ipsum',
+                         }
+                }
+
+              var p1 = {
+                id:'001',
+                title: 'produção 1',
+                start: date_format,
+                backgroundColor: 'green',
+              }
+
+              var result = [];
+              result.push(p1);
+                for (var i = 0; i < produtos.length; i++)
+                {
+                    if(jQuery.inArray(produtos[i].name, list_selected) !== -1) 
+                    {
+                      //elemento selecionado
+
+                    var data_ag = (moment(date_format).subtract(produtos[i].days, 'days').format("YYYY-MM-DD"));
+                    result.push(criarEvento(produtos[i],data_ag));
+                    }
+                }
+
+        //  $('#display-json').html(JSON.stringify(checkedItems, null, '\t'));
+      
+             $('#calendar').fullCalendar( 'addEventSource', result );
+
+         }else
+         {
+
+            alert("Erro aqui!")
+
+         }
+
+
+
+      });
+
+
+  });
+
+
+</script>
+<!--<body>-->
+ <body onload="onInit()"> 
+<!-- Button modal fullscreen -->
+<button type="button" class="btn btn-primary btn-lg center-block" data-toggle="modal" data-target="#modal-fullscreen">
+  Launch modal fullscreen
+</button>
+
+    <h4>Status:</h4>
+    <div id="status"></div>
+    <button onclick="selecionaDados()">SELECIONAR DADOS</button>
+
+
+<!-- Modal fullscreen -->
+<div class="modal modal-fullscreen fade" id="modal-fullscreen" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+
+        <h2 class="modal-title text-center text-success" id="title">Lista de Produtos</h2>
+      </div>
+      <div class="modal-body">
+
+            <div class="container" style="max-height: 300px;overflow: auto;">
+                <ul class="list-group checked-list-box">
+                </ul>
+            </div>
+
+      <div class="modal-footer">
+        <a href="#"><button type="button" class="btn btn-success btn-lg" id="btn-proximo-lp" > <span class="text" data-toggle="modal"  data-target="#modal-agenda" >Próximo</span></button></a>
+        <button type="button" class="btn btn-lg btn-danger" data-dismiss="modal">Fechar</button>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Modal Agenda -->
+<div class="modal modal-agenda fade" id="modal-agenda" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h2 class="modal-title text-center text-success" id="title">Agenda</h2>
+      </div>
+      <div class="modal-body">
+
+  <header>
+    <!--<h2 class="text-primary">Agendar<h2> -->
+  </header>
+   <div class="container well">
+    <div class="row">
+        <div class='col-sm-6 col-sm-4'>
+            <h3 class="text-info">Selecione a data</h3>
+            <input type="text" name="date" id="agendar" class="form-control"value="">
+            <script type="text/javascript">
+              $(function(){
+                $('*[name=date]').appendDtpicker();
+              });
+            </script>
+      </div>
+    </div>
+  </div>
+
+      <div class:"modal-footer">
+          <a href="#"><button type="button" class="btn btn-success btn-lg" id="btn-proximo-agendar" > <span class="text" data-toggle="modal"  
+            data-target="#modal-calendario"
+         >Próximo
+          </span></button></a>
+          <button type="button" class="btn btn-lg btn-danger" data-dismiss="modal">Fechar</button>
+          <button type="button" class="btn btn-lg btn-info" id="btn-getdate">getDate</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Calendario -->
+<div class="modal modal-calendario fade" id="modal-calendario" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h2 class="modal-title text-center text-success" id="title">Datas para colheita</h2>
+      </div>
+      <div class="modal-body">
+
+       <div id='calendar'></div>
+        <div class="container text-center">
+          <ul>
+            <li><a href="#" class="btn btn-info" style="color:#A7DBD8"><i class=""></i></a> P1- Entrega em 10/05/2015</li>
+            <li><a href="#" class="btn btn-success"><i class=""></i></a> P2- Entrega em 15/05/2015</li>
+            <li><a href="#" class="btn btn-primary"><i class=""></i></a> P3- Entrega em 20/05/2015</li>
+          </ul>
+        </div>
+
+      </div><!--modal body -->
+      <div class:"modal-footer">
+      <button type="button" class="btn btn-lg btn-danger" data-dismiss="modal">Fechar</button>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
