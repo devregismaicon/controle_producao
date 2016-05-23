@@ -89,12 +89,114 @@ body {
    background-image: url("img/logo.png");
 }
 
-
-
-
 </style>
 
 </head>
+
+<!--<body>-->
+ <body onload="onInit()"> 
+<!-- Button modal fullscreen -->
+<button type="button" class="btn btn-primary btn-lg center-block" data-toggle="modal" data-target="#modal-fullscreen">
+  Launch modal fullscreen
+</button>
+
+    <h4>Calendário do Code pan:</h4>
+    <div id="status"></div>
+    <button onclick="selecionaDados()">SELECIONAR DADOS</button>
+    <button id="btn-get-data">GET DATA</button>
+
+<!-- Modal fullscreen -->
+<div class="modal modal-fullscreen fade" id="modal-fullscreen" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+
+        <h2 class="modal-title text-center text-success" id="title">Lista de Produtos</h2>
+      </div>
+      <div class="modal-body">
+
+            <div class="container" style="max-height: 300px;overflow: auto;">
+                <ul class="list-group checked-list-box">
+                </ul>
+            </div>
+
+      <div class="modal-footer">
+        <a href="#"><button type="button" class="btn btn-success btn-lg" id="btn-proximo-lp" > <span class="text" data-toggle="modal"  data-target="#modal-agenda" >Próximo</span></button></a>
+        <button type="button" class="btn btn-lg btn-danger" data-dismiss="modal">Fechar</button>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Modal Agenda -->
+<div class="modal modal-agenda fade" id="modal-agenda" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h2 class="modal-title text-center text-success" id="title">Agenda</h2>
+      </div>
+      <div class="modal-body">
+
+  <header>
+    <!--<h2 class="text-primary">Agendar<h2> -->
+  </header>
+   <div class="container well">
+    <div class="row">
+        <div class='col-sm-6 col-sm-4'>
+            <h3 class="text-info">Selecione a data</h3>
+            <input type="text" name="date" id="agendar" class="form-control"value="">
+            <script type="text/javascript">
+              $(function(){
+                $('*[name=date]').appendDtpicker();
+              });
+            </script>
+      </div>
+    </div>
+  </div>
+
+      <div class:"modal-footer">
+          <a href="#"><button type="button" class="btn btn-success btn-lg" id="btn-proximo-agendar" > <span class="text" data-toggle="modal"  
+            data-target="#modal-calendario"
+         >Próximo
+          </span></button></a>
+          <button type="button" class="btn btn-lg btn-danger" data-dismiss="modal">Fechar</button>
+          <button type="button" class="btn btn-lg btn-info" id="btn-getdate">getDate</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Calendario -->
+<div class="modal modal-calendario fade" id="modal-calendario" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h2 class="modal-title text-center text-success" id="title">Datas para colheita</h2>
+      </div>
+      <div class="modal-body">
+
+       <div id='calendar'></div>
+        <div class="container text-center">
+          <ul>
+            <li><a href="#" class="btn btn-info" style="color:#A7DBD8"><i class=""></i></a> P1- Entrega em 10/05/2015</li>
+            <li><a href="#" class="btn btn-success"><i class=""></i></a> P2- Entrega em 15/05/2015</li>
+            <li><a href="#" class="btn btn-primary"><i class=""></i></a> P3- Entrega em 20/05/2015</li>
+          </ul>
+        </div>
+
+      </div><!--modal body -->
+      <div class:"modal-footer">
+      <button type="button" class="btn btn-lg btn-danger" data-dismiss="modal">Fechar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
 
 $('#modal-fullscreen').on('hidden', function () {
@@ -104,12 +206,15 @@ $('#modal-fullscreen').on('hidden', function () {
 
 </script>
 
+</body>
+
 <script>
 
-  $(document).ready(function() {
+ $('#btn-get-data').on('click', function(event) {
+
+    console.log("onready")
 
     //lista de produtos dinamica - montar busca por meio do bd
-    console.log("carrendo!");
     console.log(produtos);
       //var produtos=
       /*var produtos =
@@ -340,114 +445,10 @@ $('#modal-fullscreen').on('hidden', function () {
 
 
       });
-
-
   });
 
 
+
+
 </script>
-<!--<body>-->
- <body onload="onInit()"> 
-<!-- Button modal fullscreen -->
-<button type="button" class="btn btn-primary btn-lg center-block" data-toggle="modal" data-target="#modal-fullscreen">
-  Launch modal fullscreen
-</button>
-
-    <h4>Status:</h4>
-    <div id="status"></div>
-    <button onclick="selecionaDados()">SELECIONAR DADOS</button>
-
-
-<!-- Modal fullscreen -->
-<div class="modal modal-fullscreen fade" id="modal-fullscreen" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-
-        <h2 class="modal-title text-center text-success" id="title">Lista de Produtos</h2>
-      </div>
-      <div class="modal-body">
-
-            <div class="container" style="max-height: 300px;overflow: auto;">
-                <ul class="list-group checked-list-box">
-                </ul>
-            </div>
-
-      <div class="modal-footer">
-        <a href="#"><button type="button" class="btn btn-success btn-lg" id="btn-proximo-lp" > <span class="text" data-toggle="modal"  data-target="#modal-agenda" >Próximo</span></button></a>
-        <button type="button" class="btn btn-lg btn-danger" data-dismiss="modal">Fechar</button>
-
-      </div>
-
-    </div>
-  </div>
-</div>
-
-<!-- Modal Agenda -->
-<div class="modal modal-agenda fade" id="modal-agenda" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h2 class="modal-title text-center text-success" id="title">Agenda</h2>
-      </div>
-      <div class="modal-body">
-
-  <header>
-    <!--<h2 class="text-primary">Agendar<h2> -->
-  </header>
-   <div class="container well">
-    <div class="row">
-        <div class='col-sm-6 col-sm-4'>
-            <h3 class="text-info">Selecione a data</h3>
-            <input type="text" name="date" id="agendar" class="form-control"value="">
-            <script type="text/javascript">
-              $(function(){
-                $('*[name=date]').appendDtpicker();
-              });
-            </script>
-      </div>
-    </div>
-  </div>
-
-      <div class:"modal-footer">
-          <a href="#"><button type="button" class="btn btn-success btn-lg" id="btn-proximo-agendar" > <span class="text" data-toggle="modal"  
-            data-target="#modal-calendario"
-         >Próximo
-          </span></button></a>
-          <button type="button" class="btn btn-lg btn-danger" data-dismiss="modal">Fechar</button>
-          <button type="button" class="btn btn-lg btn-info" id="btn-getdate">getDate</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Modal Calendario -->
-<div class="modal modal-calendario fade" id="modal-calendario" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h2 class="modal-title text-center text-success" id="title">Datas para colheita</h2>
-      </div>
-      <div class="modal-body">
-
-       <div id='calendar'></div>
-        <div class="container text-center">
-          <ul>
-            <li><a href="#" class="btn btn-info" style="color:#A7DBD8"><i class=""></i></a> P1- Entrega em 10/05/2015</li>
-            <li><a href="#" class="btn btn-success"><i class=""></i></a> P2- Entrega em 15/05/2015</li>
-            <li><a href="#" class="btn btn-primary"><i class=""></i></a> P3- Entrega em 20/05/2015</li>
-          </ul>
-        </div>
-
-      </div><!--modal body -->
-      <div class:"modal-footer">
-      <button type="button" class="btn btn-lg btn-danger" data-dismiss="modal">Fechar</button>
-      </div>
-    </div>
-  </div>
-</div>
-</body>
 </html>

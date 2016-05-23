@@ -4,6 +4,7 @@ var produtos= [];
 
 
 function onInit(){
+    console.log("onInit");
     try {
         if (!window.openDatabase) { // verifica se o banco de dados local abriu.
             updateStatus("Erro: Seu navegador não permite banco de dados.");
@@ -105,7 +106,7 @@ function insertDados(){// função responsavel por inserir dados na tabela.
     }
 }
 function selecionaDados(){
-    console.log("select")
+    console.log("selecionaDados")
     
     new_product = function(id,name,days){
                 return {
@@ -169,6 +170,5 @@ function updateStatus(status){ // Funções de update de formulário.
    // document.getElementById('status').innerHTML = status;
 }
 
-selecionaDados();
 
 
