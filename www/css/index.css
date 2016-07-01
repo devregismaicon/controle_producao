@@ -6,5 +6,9 @@ button
 
 body 
 {
-  background: #72cffa;
+  /*background: #72cffa;*/
+}
+
+.product .img-responsive {
+    margin: 0 auto;
 }

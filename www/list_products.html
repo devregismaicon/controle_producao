@@ -7,6 +7,7 @@
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="css/main.css" type="text/css">
+    <link rel="stylesheet" href="css/list_products.css" type="text/css">
     <!-- JQuery-->
     <script src="js/jquery.js"></script>
     <!-- required for modal-->
@@ -30,6 +31,18 @@
     <!-- BD -->
      <script type="text/javascript" src="offlinedatabaseJS.js" ></script>
      <!-- <script type="text/javascript" src="js/main.js" ></script> -->
+     <!--flex-calendar -->
+     <!-- flex-calendar -->
+         <link rel="stylesheet" href="flex-calendar/bower_components/flex-calendar/dist/flex-calendar.css">
+             <script type="text/javascript" src="flex-calendar/bower_components/angular/ajax/libs/angularjs/1.4.0/angular.min.js"></script>
+                 <script type="text/javascript" src="flex-calendar/bower_components/angular/ajax/libs/angular-translate/2.7.2/angular-translate.js"></script>
+                     <script type="text/javascript" src="flex-calendar/bower_components/angular-translate/angular-translate.min.js"></script>
+                         <script type="text/javascript" src="flex-calendar/bower_components/flex-calendar/dist/flex-calendar.js"></script>
+                             <!--CSS -->
+                                 <link rel="stylesheet" href="flex-calendar/bower_components/css/calendar-flex.css">
+                                     <!-- Javascript-->
+                                         <script type="text/javascript" src="flex-calendar/bower_components/js/calendar-flex.js"></script>
+
 
 <style>
 h3, h2 {
@@ -95,22 +108,50 @@ body {
 
 <!--<body>-->
  <body onload="onInit()"> 
-<!-- Button modal fullscreen -->
-<button type="button" class="btn btn-primary btn-lg center-block" data-toggle="modal" data-target="#modal-fullscreen">
-  Launch modal fullscreen
+
+     <!--list products -->  
+     <div class="container"  id="container">
+         <div class="row post" style="background: white none repeat scroll 0% 0%;">
+             <div class="col-xs-6">
+                <p><img src="img/produtos.png" alt="produtos" style="width:150px;height:100px;"></p>
+             </div>
+            <div class="col-xs-6">
+               <h4> Passo 1 - Selecione os produtos desejados</h4>
+             </div>
+         </div>
+         <!-- schedule -->
+         <div class="row post" style="background: white none repeat scroll 0% 0%;">
+             <div class="col-xs-6">
+                <p><img src="img/agendar.png" alt="produtos" style="width:150px;height:100px;"></p>
+             </div>
+            <div class="col-xs-6">
+               <h4> Passo 2 - Selecione a data do agendamento!</h4>
+             </div>
+         </div>
+         <!-- calendar -->
+        <div class="row post" style="background: white none repeat scroll 0% 0%;">
+             <div class="col-xs-6">
+                <p><img src="img/plantio_dias.png" alt="produtos" style="width:150px;height:100px;"></p>
+             </div>
+            <div class="col-xs-6">
+               <h4> Passo 3 - Veja os dias dos plantios <h4>
+
+             </div>
+         </div> 
+
+       </div><!-- div container-->
+
+ <!-- Button modal list_products -->
+<button type="button" id="btn-get-data" class="btn btn-success btn-lg center-block" data-toggle="modal" data-target="#modal-fullscreen">
+  Começar
 </button>
 
-    <h4>Calendário do Code pan:</h4>
-    <div id="status"></div>
-    <button onclick="selecionaDados()">SELECIONAR DADOS</button>
-    <button id="btn-get-data">GET DATA</button>
-
-<!-- Modal fullscreen -->
+<!-- Modal list_products -->
 <div class="modal modal-fullscreen fade" id="modal-fullscreen" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <button type="button" id="" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 
         <h2 class="modal-title text-center text-success" id="title">Lista de Produtos</h2>
       </div>
@@ -131,7 +172,7 @@ body {
   </div>
 </div>
 
-<!-- Modal Agenda -->
+<!-- Modal Scheldule -->
 <div class="modal modal-agenda fade" id="modal-agenda" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -144,17 +185,29 @@ body {
   <header>
     <!--<h2 class="text-primary">Agendar<h2> -->
   </header>
-   <div class="container well">
+   <div class="container">
     <div class="row">
+       
         <div class='col-sm-6 col-sm-4'>
             <h3 class="text-info">Selecione a data</h3>
-            <input type="text" name="date" id="agendar" class="form-control"value="">
+            <!--   <input type="text" name="date" id="agendar" class="form-control"value="">-->
             <script type="text/javascript">
-              $(function(){
+             /* $(function(){
                 $('*[name=date]').appendDtpicker();
-              });
+              });*/
             </script>
+
+    <div ng-app="app">
+          <div ng-controller="MainController">
+             <div class="wrapp">
+                <flex-calendar options="options" events="events"></flex-calendar>
+             </div>
+        </div>
+    </div>
+
       </div>
+
+
     </div>
   </div>
 
@@ -170,7 +223,7 @@ body {
   </div>
 </div>
 
-<!-- Modal Calendario -->
+<!-- Modal Calendar -->
 <div class="modal modal-calendario fade" id="modal-calendario" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -183,6 +236,7 @@ body {
        <div id='calendar'></div>
         <div class="container text-center">
           <ul>
+              <p>colocar conteúdo dinamico</p>
             <li><a href="#" class="btn btn-info" style="color:#A7DBD8"><i class=""></i></a> P1- Entrega em 10/05/2015</li>
             <li><a href="#" class="btn btn-success"><i class=""></i></a> P2- Entrega em 15/05/2015</li>
             <li><a href="#" class="btn btn-primary"><i class=""></i></a> P3- Entrega em 20/05/2015</li>
@@ -216,39 +270,7 @@ $('#modal-fullscreen').on('hidden', function () {
 
     //lista de produtos dinamica - montar busca por meio do bd
     console.log(produtos);
-      //var produtos=
-      /*var produtos =
-      [{id:1,
-        name: "Açafrão",
-        days: 45},
-      {
-        id:2,
-        name: "Alface",
-        days: 12
-      },
-      {
-        id:3,
-        name: "Almeirão",
-        days: 12
-      },
-      {
-        id:4,
-        name: "Beringela",
-        days: 12
-      },
-      {
-        id:5,
-        name: "Beterraba",
-        days: 12
-      },
-      {
-        id:6,
-        name: "Cebola Cabeça",
-        days: 12
-      }
-    ];*/
-
-    var cList = $('ul.list-group.checked-list-box')
+         var cList = $('ul.list-group.checked-list-box')
     $.each(produtos, function(i)
     {
         var li = $('<li/>')
@@ -382,11 +404,11 @@ $('#modal-fullscreen').on('hidden', function () {
       // agendamento
       $('#btn-proximo-agendar').on('click', function(event){
         event.preventDefault();
-        //pegar a data
+        //get date
       date_format = moment($('#agendar').handleDtpicker('getDate')).format("YYYY-MM-DD");
       new_date = (moment(date_format).format("YYYY-MM-DD"));
 
-      //validar data
+      //try to validade date >= today
       var cont = 0;
      $("#agendar").each(function(){
          if($(this).val() == "")
