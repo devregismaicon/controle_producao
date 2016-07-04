@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Agendamento</title>
+	<!--Requirement jQuery-->
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+
+	<!--Load Script and Stylesheet -->
+	<script type="text/javascript" src="js/jquery.simple-dtpicker.js"></script>
+	<link type="text/css" href="css/jquery.simple-dtpicker.css" rel="stylesheet" />
+	<!---->
+	<script src='js/moment.min.js'></script>
+	<!-- Font Awesome-->
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css" type="text/css">
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+	<style type="text/css">
+		body { background-color: #fefefe; padding-left: 2%; padding-bottom: 100px; color: #101010; }
+		footer{ font-size:small;position:fixed;right:5px;bottom:5px; margin-top: 30px;}
+		a:link, a:visited  { color: #0000ee; }
+		pre{ background-color: #eeeeee; margin-left: 1%; margin-right: 2%; padding: 2% 2% 2% 5%; }
+		p { font-size: 0.9rem; }
+		ul { font-size: 0.9rem; }
+		hr { border: 2px solid #eeeeee; margin: 2% 0% 2% -3%; }
+		h3 { border-bottom: 2px solid #eeeeee; margin: 2rem 0 2rem -1%; padding-left: 1%; padding-bottom: 0.1em; }
+		h4 { border-bottom: 1px solid #eeeeee; margin-top: 2rem; margin-left: -1%; padding-left: 1%; padding-bottom: 0.1em; }
+		#btn_proximo { margin-top:30px; }
+	</style>
+</head>
+<body>
+	<header>
+		<h2 class="text-primary">Agendar<h2>
+	</header>
+   <div class="container well">
+    <div class="row">
+        <div class='col-sm-6 col-sm-4'>
+	<h3 class="text-info">Selecione a data</h3>
+
+	<input type="text" name="date" id="agendar" value="">
+
+	<script type="text/javascript">
+		
+  $(document).ready(function() {
+	
+		$(function(){
+		$('*[name=date]').appendDtpicker({
+			
+			});
+		});
+
+	
+	$('#btn-getdate').click(function(){
+	var date = $('#agendar').handleDtpicker('getDate');
+	console.log(date);
+
+	date_format = moment(date).format("YYYY-MM-DD");
+	console.log(date_format);
+	
+	var new_date = moment(date).format('L');
+	console.log(new_date);
+
+	console.log(moment(date_format).add(10, 'days').format("YYYY-MM-DD"));
+
+
+
+	});
+
+});
+
+		</script>
+	        </div>
+	    </div>
+	</div>
+			<div class="container">
+              <a href="calendar.html"><button type="button" class="btn btn-success btn-block btn-lg" id="btn_proximo" style="margin-bottom:30px;"> <span class="text">Próximo</span></button></a>
+
+              <button type="button" class="btn btn-success btn-block btn-lg" id="btn-getdate" style="margin-bottom:30px;"> <span class="text">GetDay</span></button>
+
+
+           </div>
+	<footer>
+		<!--<a href="https://github.com/mugifly/jquery-simple-datetimepicker">jquery.simple-dtpicker.js (jquery-simple-datetimepicker)</a><br>
+		 - Your feedback is highly appreciated :)!-->
+	</footer>
+</body>
+</html>

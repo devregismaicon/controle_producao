@@ -1,0 +1,140 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  Última alteração em 08/2013 por Rafael Pasquini (WTDCC 2013)
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[11pt]{article}
+\usepackage{sbc-template}
+\usepackage{graphicx,url}
+%\usepackage[dvips]{graphicx}
+%\usepackage[pdftex]{color,graphicx}
+\usepackage{multicol}
+\usepackage{verbatim}
+\usepackage{array}
+\usepackage{amssymb,amsmath}
+\usepackage[brazilian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\sloppy
+
+\title{Utilização de métodos de acesso métricos eficientes para suporte a consultas por similaridade sobre dados complexos em Fluxo Contínuo de dados.}
+
+\author{Autor: Régis Michel dos Santos Sousa\inst{1},\\ Orientador:Prof. Dr. Humberto Luiz Razente\inst{1}}
+
+
+\address{Programa de Pós-Graduação em Ciência da Computação\\
+ Universidade Federal do Uberlândia (UFU)\\
+  Uberlândia -- MG -- Brasil
+  \email{mail@pos.facom.ufu.br, mail@facom.ufu.br}
+}
+
+\begin{document}
+
+\maketitle
+
+\begin{center}
+Nível: Mestrado\\
+Mês e ano de ingresso no programa: 03/2015\\
+Mês e ano de previsão de conclusão: 03/2007\\
+Data de aprovação da proposta de dissertação/plano de tese: 19/02/2015\end{center}
+
+\begin{resumo}
+Escreva aqui o resumo do seu trabalho. O resumo deve tratar da proposta para a dissertação. Ele deve resumir de forma sucinta a razão para o trabalho, os principais resultados e as conclusões esperadas do estudo. Não inclua obras de arte, tabelas, equações elaboradas ou referências a outras partes do artigo ou para a listagem de referência no final. Utilize a formatação como neste modelo Incluindo fonte (modelo e tamanho), parágrafo e espaçamentos. As sessões enumeradas a seguir são sugestões para a melhor estruturação do corpo do texto.
+\end{resumo}
+
+\begin{palavraschave}
+Consultar por Similaridade, Fluxo Contínuo de Dados, Estrutura de Indexação.
+\end{palavraschave}
+
+\section{Introdução e Motivação}
+\label{sec:intro}
+
+Esta sessão é destinada à introdução e motivação da pesquisa, cujo objetivo é caracterizar a área/problema sendo investigada(o).
+%A grande parte dos dados que são gerados \textit{online} em %tempo real e podem assumir uma série de formatos variados, %alguns destes são conhecidos como dados complexos, tais %como: dados vetoriais, de trajetórias, dados multimídia (%imagens, áudios e vídeos), grafos, séries temporais, entre %outros.
+
+ A nova forma de gerar e consumir dados contribui para o surgimento de sistemas que processam em \textit{streams}, ou seja, em fluxos contínuos de dados(FCD). 
+
+ O processamento em streams possuem uma abordagem diferente dos modelos convencionais. Sendo necessário que os algoritmos tenham a capacidade de aprender continuamente, sugerindo que, a qualquer instante de tempo, o modelo seja capaz de representar adequadamente o conhecimento, visto que, a distribuição dos dados pode alterar ao longo do tempo \cite{gama2012survey}.
+
+A possibilidade de extração de conhecimentos sobre estes dados, gera a necessidade da criação de estratégias para definir métodos para armazenar, organizar e recuperar dados de forma eficiente.
+
+Para diversos tipos de dados, tais como, dados complexos (dados vetoriais, de trajetórias, dados multimídia, grafos, séries temporais), é empregada a noção de similaridade quando o objetivo é a recuperação sendo útil recuperar os documentos mais similares (ou menos dissimilares) ao de referência.
+
+%Há dezenas de métodos de acesso desenvolvidos nas últimas duas décadas \cite{zezula2006similarity} que permitem a computação de consultas baseadas na dissimilaridade entre pares de elementos.
+
+As estruturas que permitem indexar e recuperar rapidamente  um determinado objeto são conhecidas como Métodos de Acesso(MAMs).
+Estes métodos são categorizados de diferentes maneiras, tais como: tipo de resposta, dinamicidade da estrutura, forma de particionamento do espaço de busca e tipo de pivôs.
+% - ver com o Humberto.
+
+Faz-se necessário o uso de estruturas indexação para acelerar as consultas por similaridade sobre dados complexos sem que estas comprometam a dinamicidade da estrutura ao adicionar e remover elementos em FCD.
+
+Deste modo, identifica-se o problema pois a medida que os dados são gerados pelo fluxo eles devem ser processados e armazenados na estrutura. O processo pelo qual é realizado o indexação do elemento pode ocasionar a degradação da estrutura devido ao grau de sobreposição entre a subárvores.
+
+Neste sentido, pretende-se, com este trabalho, propor uma abordagem para melhorar o desempenho de MAMs dinâmicos, no nosso caso específico do estado a Slim Tree para acelerar consultas por similaridade em ambiente de FCD, tendo com fator fundamental não comprometer a dinamicidade da estrutura.
+
+Diante disso, a abordagem do qual propomos é a criação de uma estrutura auxiliar, janela de eventos, para armazenamento dos dados provenientes do fluxo até que este possa ser indexados na slim tree de modo a minimizar a grau de sobreposição.
+
+\section{Fundamentação Teórica}
+\label{sec:fund_teo}
+
+Nessa seção será apresentado noções fundamentais que compreendem este trabalho.
+Inicialmente aborda-se os conceitos sobre fluxo contínuo de dados, consultas por similaridade considerando um função de distância e por fim o conceitos sobre métodos de acesso métrica.
+
+consulta por similaridade
+rage e knn
+métodos de acesso
+sobreposisão
+
+%\subsection{Fluxo Continuo de dados} \label{sec:consulta_por_similaridade} 
+Um fluxo contínuo de dados (\textit{data streams}) é uma sequência de dados,  $x_1,x_2,...,x_n$, ou seja, $S=\{xi\}_{i=1}^{N}$, potencialmente ilimitado (N $\longrightarrow\infty$). Cada objeto dado é descrito por um vetor de atributos \textit{n}-dimensional $xi=[x_{i}^{j}]_{j=1}^{n}$, pertencente a um espaço de atributos $\Omega$ \cite{silva2013data}.
+%Como visto anteriormente, devido ao espaço de memória limitado não é possível o armazenamento de todos os dados do fluxo, o desafio consiste em determinar quantos e quais dados devem ser utilizados no processo de aprendizagem.
+%\subsection{Consulta por Similaridade} \label{sec:consulta_por_similaridade}
+A similaridade entre os dados é definida por meio de uma função de distância, ou função ``dissimilaridade"  $d(O_i,O_j)$.
+Uma consulta por similaridade pode ser vista como um processo para se obter um conjunto de objetos ordenados pela sua distância para um dado objeto \textit{query}. 
+A recuperação dos objetos será baseada em consultas por abrangência (\textit{range query}) e consultas aos vizinhos mais próximos (\textit{k-nearest neighbors query}) \cite{Ciaccia:1997:MEA:645923.671005}, utilizando métricas da família Minkowski para o cálculo da dissimilaridade \cite{bugatti2008assessing}.
+Os principais tipos de consulta por similaridade são \textit{range query} (consulta por abrangência) e \textit{k-nearest neighbor query} (consulta aos k-vizinhos mais próximos).
+%\subsection{Métodos de Acesso Métricos (MAMs)} \label{sec:consulta_por_similaridade}
+Os Métodos de Acesso Métricos (MAMs) estão entre as principais técnicas usadas em consultas por similaridade, essas técnicas indexam os objetos apenas em função do valor de distância entre eles. Eles são baseados nos Métodos de Acesso (MAs), uma das principais técnicas usadas nos SGDBs para recuperar informação de maneira mais eficiente \cite{vieira2004dbm}.
+Tem-se várias estruturas para indexação de espaços métricos, dentre elas destaca-se a \textit{M-Tree} \cite{Ciaccia:1997:MEA:645923.671005}, a \textit{Slim-Tree} \cite{traina2000slim}, a \textit{DF-Tree} \cite{traina2002metric,traina2002improve}, a \textit{DBM-Tree} \cite{vieira2004dbm}, a \textit{Onion-Tree} \cite{carelo2011slicing} e a \textit{OMNI-Family} \cite{traina2007omni}.
+Essas estruturas podem ser utilizadas para indexação, após os objetos indexados é realizada à recuperação.
+
+%A medida de distância que é melhor representada por funções satisfazem as propriedades métricas, definidas pelos seguintes termos: simetria, identidade, não negatividade e desigualdade triangular \cite{zezula2006similarity}.
+
+\section{Contribuição do Trabalho}
+\label{sec:contrib}
+Considerando as técnicas apresentadas na seção anterior o objetivo foi aquirir maior embasamento teórico, o que contribuiu para a formulação das seguintes hipóteses. \\
+H1: O uso de um estrutura auxiliar, janela de eventos [Gama], %podendo ser um vetor, árvore ou lista,
+na etapa de indexação e recuperação de objetos provem melhor desempenho da consultas por similaridade em fluxo contínuo de dados.
+\\ 
+H2: O custo de construção daa arvoré será maior porém o ganho que se terá ao minimizar a sobreposição das subárvores fará com o acesso a disco e o cálculo de distância para encontrar o objeto sejam menores.
+
+consulta ajuda a não degradar a estrutura de indexação
+%quando faz mais acesso a disco o tempo é maior
+%area nova de aplicação
+%novo dominio de aplicação
+\section{Estado Atual}
+
+\label{sec:estado_atual}
+O trabalho se encontra em estágio de implentação dos métodos. A estruta de indexação escolhida foi Slim-Tree, primeiramente pela sua característica dinâmica e pelo fato de sua construção ser incremental. A janela de eventos que será utilizada terá seu tamanho variado mediante ao base de dados que será utilizada. 
+\\ Listas as bases 
+
+
+Apresente a situação atual do andamento do desenvolvimento do trabalho. Caso haja necessidade, apresente detalhes sobre a metodologia para desenvolvimento do trabalho, incluindo materiais e métodos, descrição de ambiente e experimentos, 
+
+%\section{Análise de Resultados}
+%\label{sec:result}
+
+
+\section{Trabalhos Relacionados}
+\label{sec:trabalhos_relacionados}
+Ainda são poucos os trabalhos que abordam o tema em questão. A maioria dos trabalhos da area fazem uso de estruturas dinânimicas no entanto os testes que são realizados são em base de dados estáticas, ou seja, os dados são indexados e após todos estarem na base é realizado um conjunto de consultas.
+%Alguns trabalhos na literatura que 
+
+Trabalhos relacionados, ilustrando a que ponto está o estado da arte junto à comunidade acadêmica, com pesquisas relacionadas à sua. 
+
+\bibliographystyle{sbc}
+\bibliography{bib}
+
+\end{document}

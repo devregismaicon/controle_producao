@@ -1,4 +1,5 @@
 console.log("carregando.bd");
+alert("carregandobd");
 var localDB = null;
 var produtos= [];
 

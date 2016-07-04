@@ -1,0 +1,116 @@
+/*!
+ * FullCalendar v2.7.1 Print Stylesheet
+ * Docs & License: http://fullcalendar.io/
+ * (c) 2016 Adam Shaw
+ */
+
+
+/* Global Event Restyling
+--------------------------------------------------------------------------------------------------*/
+
+/*http://stackoverflow.com/questions/30121240/javascript-library-that-manipulates-dates-like-carbon*/
+h3, h2 {
+    font-family: Lobster, Monospace;
+  }
+/*http://stackoverflow.com/questions/30121240/javascript-library-that-manipulates-dates-like-carbon*/
+h3, h2 {
+    font-family: Lobster, Monospace;
+  }
+  #left-well {
+    
+  }
+  h2 {
+    color:rgba(76, 175, 80, 0.92);
+
+  }
+  button{
+    margin: 20px 20px 20px 0px;
+
+  }
+
+  /* CSS REQUIRED */
+.state-icon {
+    left: -5px;
+}
+.list-group-item-primary {
+    color: rgb(255, 255, 255);
+    background-color: rgb(66, 139, 202);
+}
+
+/* DEMO ONLY - REMOVES UNWANTED MARGIN */
+.well .list-group {
+    margin-bottom: 0px;
+}
+
+body {
+  background: #72cffa;
+}
+.modal-dialog {
+  width: 100%;
+  height: 100%;
+ margin: 0;  padding: 0;
+}
+
+.modal-content {
+  height: auto;
+  min-height: 100%;
+  border-radius: 0;
+}
+
+/*aqui*/
+h3, h2 {
+    font-family: Lobster, Monospace;
+  }
+/*http://stackoverflow.com/questions/30121240/javascript-library-that-manipulates-dates-like-carbon*/
+h3, h2 {
+    font-family: Lobster, Monospace;
+  }
+  #left-well {
+
+  }
+  h2 {
+    color:rgba(76, 175, 80, 0.92);
+
+  }
+  button{
+    margin: 20px 20px 20px 0px;
+
+  }
+
+  /* CSS REQUIRED */
+.state-icon {
+    left: -5px;
+}
+.list-group-item-primary {
+    color: rgb(255, 255, 255);
+    background-color: rgb(66, 139, 202);
+}
+
+/* DEMO ONLY - REMOVES UNWANTED MARGIN */
+.well .list-group {
+    margin-bottom: 0px;
+}
+
+body {
+  background: #72cffa;
+}
+.modal-dialog {
+  width: 100%;
+  height: 100%;
+ margin: 0;  padding: 0;
+}
+
+.modal-content {
+  height: auto;
+  min-height: 100%;
+  border-radius: 0;
+}
+#calendar {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .teste{
+  background-color: yellow;
+  /*background-color: lightblue;*/
+   background-image: url("img/logo.png");
+}
