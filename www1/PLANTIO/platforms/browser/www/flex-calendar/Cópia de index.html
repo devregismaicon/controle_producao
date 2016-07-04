@@ -1,0 +1,44 @@
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+    <title>calendar R</title>
+    
+    <!-- flex-calendar -->
+    <link rel="stylesheet" href="bower_components/flex-calendar/dist/flex-calendar.css">
+    <script type="text/javascript" src="bower_components/angular/ajax/libs/angularjs/1.4.0/angular.min.js"></script>
+    <script type="text/javascript" src="bower_components/angular/ajax/libs/angular-translate/2.7.2/angular-translate.js"></script>
+    <script type="text/javascript" src="bower_components/angular-translate/angular-translate.min.js"></script>
+    <script type="text/javascript" src="bower_components/flex-calendar/dist/flex-calendar.js"></script>
+    <!--CSS -->
+    <link rel="stylesheet" href="bower_components/css/calendar-flex.css">
+    <!-- Javascript-->
+    <script type="text/javascript" src="bower_components/js/calendar-flex.js"></script>
+    
+</head>
+<body>
+
+<!-- Git Repo: https://github.com/Russian60/flex-calendar -->
+<div ng-app="app">
+  <div ng-controller="MainController">
+    <h1> 
+      <span class="l">Flex</span><span class="r">Calendar</span>
+    </h1>
+    <p>An Elegant Calendar Built With Angular.js</p>
+    <div class="wrapp">
+      <flex-calendar options="options" events="events"></flex-calendar>
+    </div>
+    <br />
+    <p>
+      <iframe src="https://ghbtns.com/github-btn.html?user=Russian60 repo=flex-calendar type=star count=true size=large" frameborder="0" scrolling="0" width="115px" height="30px"></iframe>
+      
+      <iframe src="https://ghbtns.com/github-btn.html?user=Russian60 repo=flex-calendar type=watch count=true size=large v=2" frameborder="0" scrolling="0" width="130px" height="30px"></iframe>
+    </p>
+  </div>
+</div>
+
+
+
+</body>
+
+</html>

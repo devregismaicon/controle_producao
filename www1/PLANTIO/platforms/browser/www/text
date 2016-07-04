@@ -1,0 +1,55 @@
+--> Métodos de Acesso métricos eficiêntes.
+Em espaço de alta dimensionalidade os elementos tem a ficarem distantes ente si. Em consultas ao k vizinhos mais próximos qualquer aumento do raio de cobertura da subárvore irá englobar muitos elemento de cada vez, ocasionando o a sobreposição do nó \cite{volnyansky2009curse}.
+
+@inproceedings{volnyansky2009curse,
+  title={Curse of dimensionality in pivot based indexes},
+  author={Volnyansky, Ilya and Pestov, Vladimir},
+  booktitle={Proceedings of the 2009 Second International Workshop on Similarity Search and Applications},
+  pages={39--46},
+  year={2009},
+  organization={IEEE Computer Society}
+}
+A sobreposição ocorre quando um ou mais elementos estão cobertos por duas ou mais regiões do mesmo nó, mas cada elemento é armazendo apenas em uma delas, como consequência consultas nestes nós tendem a visitar todas as regiões nas quais existem sobreposição das consultas.
+O nível de sobreposição influência o número de acesso a disco. 
+
+
+
+Um método do acesso depende dos operadores de comparação disponíveis para os dados indexados.
+
+[{id:1,
+          name: "Açafrão",
+          days: 10
+
+        },
+        {
+          id:2,
+          name: "Alface",
+          days: 5
+
+        },
+        {
+          id:3,
+          name: "Almeirão",
+          days: 11
+
+        },
+        {
+          id:4,
+          name: "Beringela",
+          days: 5
+
+        },
+        {
+          id:5,
+          name: "Beterraba",
+          days: 12
+
+        },
+        {
+          id:6,
+          name: "Cebola Cabeça",
+          days: 12
+
+        }
+      ];
+
